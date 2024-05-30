@@ -1,7 +1,7 @@
 <template>
 	<div class="logo">
 		<NuxtLink to="/" class="logo__link">
-			Nuxt-Market
+			<span class="logo__text">Nuxt-Market</span>
 			<img
 				class="logo__img"
 				src="/assets/icons/alien-ship-blue.svg"
@@ -15,27 +15,57 @@
 
 <style scoped lang="scss">
 .logo {
+	position: relative;
+
 	&__link {
 		text-transform: uppercase;
 		font-weight: 700;
-		display: flex;
-		align-items: center;
+		display: inline-block;
 		font-size: 24px;
 		font-family: 'Open Sans', sans-serif;
+		position: relative;
+	}
+
+	&__text {
+		position: relative;
 	}
 
 	&__img {
+		z-index: 1;
 		height: 36px;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: translate(-100%, -50%);
+		animation: fly-ufo-blue 7.5s linear infinite;
 	}
-}
 
-@media (min-width: 768px) {
-	.logo {
-		&__link {
-			font-size: 28px;
+	@keyframes fly-ufo-blue {
+		0% {
+			transform: translate(-100%, -50%) translateX(0);
 		}
-		&__img {
-			height: 40px;
+		25% {
+			transform: translate(-100%, 10%) translateX(200%);
+		}
+		50% {
+			transform: translate(-100%, -50%) translateX(570%);
+		}
+		75% {
+			transform: translate(-100%, -110%) translateX(400%);
+		}
+		100% {
+			transform: translate(-100%, -50%) translateX(0);
+		}
+	}
+
+	@media (min-width: 768px) {
+		.logo {
+			&__link {
+				font-size: 28px;
+			}
+			&__img {
+				height: 40px;
+			}
 		}
 	}
 }

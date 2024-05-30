@@ -7,7 +7,7 @@
 
 <script setup>
 import ProductList from '@/components/marketplace/ProductList.vue'
-import { useStore } from '@/stores'
+import { useStore } from '~/store'
 import { computed, onMounted } from 'vue'
 
 const store = useStore()
@@ -19,8 +19,11 @@ onMounted(() => {
 const products = computed(() => store.products)
 </script>
 
-<style scoped>
-.marketplace__title {
-	text-align: center;
+<style lang="scss" scoped>
+.marketplace {
+	min-height: 90vh;
+	&__title {
+		text-align: center;
+	}
 }
 </style>

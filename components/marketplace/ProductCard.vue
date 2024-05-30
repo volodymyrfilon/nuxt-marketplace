@@ -44,7 +44,7 @@
 
 <script setup>
 import Button from '@/components/ui/Button.vue'
-import { useStore } from '@/stores'
+import { useStore } from '~/store'
 import { computed } from 'vue'
 
 const { product } = defineProps(['product'])
