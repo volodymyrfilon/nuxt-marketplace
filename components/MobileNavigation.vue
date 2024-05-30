@@ -9,17 +9,11 @@
 			<span class="mobile-nav__toggle-icon"></span>
 		</button>
 		<nav :class="['mobile-nav', { 'mobile-nav--open': isMenuOpen }]">
-			<ul class="mobile-nav__list">
+			<ul class="mobile-nav__list" v-for="item in data" :key="item.label">
 				<li class="mobile-nav__item" @click="toggleMenu">
-					<NuxtLink class="mobile-nav__link" href="/">Home</NuxtLink>
-				</li>
-				<li class="mobile-nav__item" @click="toggleMenu">
-					<NuxtLink class="mobile-nav__link" href="/about">About</NuxtLink>
-				</li>
-				<li class="mobile-nav__item" @click="toggleMenu">
-					<NuxtLink class="mobile-nav__link" href="/marketplace"
-						>Marketplace</NuxtLink
-					>
+					<NuxtLink class="mobile-nav__link" :to="item.link">{{
+						item.label
+					}}</NuxtLink>
 				</li>
 			</ul>
 		</nav>
@@ -28,6 +22,7 @@
 
 <script setup>
 import { ref } from 'vue'
+const { data } = defineProps(['data'])
 
 const isMenuOpen = ref(false)
 const toggleMenu = () => {
@@ -131,5 +126,9 @@ const toggleMenu = () => {
 			color: #3b9de8;
 		}
 	}
+}
+
+.router-link-exact-active {
+	color: #3b9de8;
 }
 </style>

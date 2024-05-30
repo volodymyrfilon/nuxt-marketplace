@@ -1,17 +1,31 @@
 <template>
-	<div>
-		<Header />
-		<main class="container main">
-			<slot />
-		</main>
-		<Footer />
-	</div>
+	<Header :data="navigationData" />
+
+	<main class="container main main-landing">
+		<slot />
+	</main>
+
+	<Footer />
 </template>
 
-<script setup></script>
+<script setup>
+const navigationData = [
+	{
+		link: '/',
+		label: 'Home',
+		isDisabled: false,
+	},
+	{
+		link: '/about',
+		label: 'About',
+		isDisabled: false,
+	},
+	{
+		link: '/marketplace',
+		label: 'Marketplace',
+		isDisabled: false,
+	},
+]
+</script>
 
-<style scoped lang="scss">
-.main {
-	margin-top: 20px;
-}
-</style>
+<style scoped lang="scss"></style>

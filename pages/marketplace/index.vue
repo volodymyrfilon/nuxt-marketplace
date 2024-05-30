@@ -1,7 +1,26 @@
 <template>
-	<div>hello marketplace</div>
+	<div class="container marketplace">
+		<h1 class="marketplace__title title">Marketplace</h1>
+		<ProductList :products="products" />
+	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import ProductList from '@/components/marketplace/ProductList.vue'
+import { useStore } from '@/stores'
+import { computed, onMounted } from 'vue'
 
-<style scoped></style>
+const store = useStore()
+
+onMounted(() => {
+	store.fetchProducts()
+})
+
+const products = computed(() => store.products)
+</script>
+
+<style scoped>
+.marketplace__title {
+	text-align: center;
+}
+</style>

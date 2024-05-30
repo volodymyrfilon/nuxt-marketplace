@@ -8,23 +8,28 @@ body {
 	margin: 0;
 	font-family: 'Montserrat', sans-serif;
 }
-
-.container {
-	margin: 0 auto;
-	width: calc(100% - 56px);
-}
-
-.title {
-	font-size: 24px;
-	margin: 0;
-}
-
 a {
 	color: $primary;
 	text-decoration: none;
 	&:hover {
 		opacity: 80%;
 	}
+}
+
+p {
+	margin: 0;
+}
+
+.container {
+	margin: 0 auto;
+	width: calc(100% - 56px);
+}
+.title {
+	font-size: 24px;
+	margin: 0;
+}
+.main {
+	margin-top: 20px;
 }
 
 @media (min-width: 480px) {
