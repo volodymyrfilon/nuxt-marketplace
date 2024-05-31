@@ -13,4 +13,17 @@ export default defineNuxtConfig({
 		dirs: ['stores'],
 	},
 	// plugins: ['@/plugins/pinia-persist.ts'],
+	app: {
+		head: {
+			title: 'Nuxt Marketplace',
+			meta: [
+				{
+					name: 'description',
+					content:
+						'Discover the best marketplace Volodymyr Filon ever made | Nuxt Marketplace',
+				},
+			],
+			link: [],
+		},
+	},
 })

@@ -77,6 +77,11 @@
 definePageMeta({
 	layout: 'landing',
 })
+
+useHead({
+	title: 'Nuxt Markeplace | About',
+	meta: [{ name: 'description', content: 'Nuxt Markeplace | About' }],
+})
 </script>
 
 <style scoped lang="scss">

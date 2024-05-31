@@ -42,6 +42,11 @@ import ProductCard from '~/components/marketplace/ProductCard.vue'
 import Button from '~/components/ui/Button.vue'
 import { useStore } from '~/stores'
 
+useHead({
+	title: 'Nuxt Markeplace | Cart',
+	meta: [{ name: 'description', content: 'Nuxt Markeplace | Cart' }],
+})
+
 const store = useStore()
 const paymentConfirmed = ref(false)
 

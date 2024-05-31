@@ -28,7 +28,7 @@
 - ✅Customized & animated 404
 - ✅Creatively animated Logo
 - ✅Creatively animated Loader
-- Interactive cart popover
+- Interactive cart dialog
 - Sort by categories
 - Search by title
 - Types
