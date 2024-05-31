@@ -19,11 +19,11 @@
 ### FEATURES
 
 - SEO optimization
-- Infinite scroll
 - Interactive cart popover
 - Payment Animation
 - ✅Customized 404
 - ✅Creatively animateg Logo
 - ✅Creatively animated Loader
+- Infinite scroll
 - Sort by categories
 - Search by title

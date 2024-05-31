@@ -18,14 +18,12 @@ export const useStore = defineStore('store', {
 		},
 	},
 	actions: {
-		async fetchProducts(limit = 8) {
+		async fetchProducts() {
 			try {
-				const response = await fetch(
-					`https://fakestoreapi.com/products?limit=${limit}`
-				)
+				const response = await fetch('https://fakestoreapi.com/products')
 				const data = await response.json()
 				if (data) {
-					this.products = [...this.products, ...data]
+					this.products = data
 				} else {
 					console.error('Failed to fetch products: data is undefined')
 				}

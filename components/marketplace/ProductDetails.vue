@@ -22,7 +22,7 @@ const { product } = defineProps(['product'])
 
 <style scoped lang="scss">
 .card {
-	height: calc(100vh - 240px);
+	min-height: calc(100vh - 240px);
 	display: flex;
 	align-items: center;
 	padding: 1rem;
