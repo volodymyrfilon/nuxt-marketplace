@@ -13,13 +13,6 @@
 				/>
 			</NuxtLink>
 		</div>
-		<div v-else class="cart__list">
-			<ProductCard
-				v-for="product in store.cart"
-				:key="product.id"
-				:product="product"
-			/>
-		</div>
 		<div v-if="store.cart.length > 0" class="cart__results">
 			<h2 class="cart__total">Total: {{ totalPrice }}$</h2>
 			<Button
@@ -28,6 +21,13 @@
 				ariaLabel="Confirm payment"
 				class="cart__button cart__button-payment"
 				@click="confirmPayment"
+			/>
+		</div>
+		<div v-if="store.cart.length > 0" class="cart__list">
+			<ProductCard
+				v-for="product in store.cart"
+				:key="product.id"
+				:product="product"
 			/>
 		</div>
 		<div v-if="paymentConfirmed" class="cart__confirmation-message">
