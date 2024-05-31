@@ -20,7 +20,8 @@
 
 ### FEATURES
 
-- ⚒️SEO optimization
+- ✅SEO
+- ✅Server side api requests
 - ⚒️Infinite scroll
 - ⚒️Cart products saving in localstorage
 - ✅Cart controls

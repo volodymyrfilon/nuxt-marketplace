@@ -26,4 +26,7 @@ export default defineNuxtConfig({
 			link: [],
 		},
 	},
+	runtimeConfig: {
+		//variable: process.env.VARIABLE
+	},
 })
