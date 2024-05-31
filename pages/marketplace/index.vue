@@ -1,21 +1,24 @@
 <template>
-	<div class="container marketplace">
+	<div class="container page marketplace">
 		<h1 class="marketplace__title title">Marketplace</h1>
-		<Loader v-if="products.length === 0" class="product-list__loader" />
-		<ProductList v-else :products="products" />
+		<Loader v-if="products.length === 0" class="marketplace__loader" />
+		<ProductList
+			v-else
+			:products="products"
+			class="marketplace__product-list"
+		/>
 	</div>
 </template>
-
 <script setup>
-import ProductList from '@/components/marketplace/ProductList.vue'
+import { computed, onMounted } from 'vue'
+import ProductList from '~/components/marketplace/ProductList.vue'
 import { useStore } from '~/stores'
 
 const store = useStore()
-let products = []
+const products = computed(() => store.products || [])
 
 const loadProducts = async () => {
 	await store.fetchProducts()
-	return (products = store.products)
 }
 
 onMounted(async () => {
@@ -25,12 +28,8 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .marketplace {
-	min-height: 80vh;
-	display: flex;
-	flex-direction: column;
-	gap: 32px;
-	&__title {
-		text-align: center;
+	&__loader {
+		height: 50vh;
 	}
 }
 </style>

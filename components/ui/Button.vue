@@ -18,6 +18,8 @@ const { data, ariaLAbel } = defineProps(['data', 'ariaLAbel'])
 	font-weight: 600;
 	font-family: 'Open Sans';
 	transition: all 0.3s ease;
+	cursor: pointer;
+	color: #333;
 
 	&:hover {
 		opacity: 0.8;

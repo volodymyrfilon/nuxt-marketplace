@@ -1,6 +1,13 @@
 <template>
 	<div class="cart-controls">
-		<div class="cart-controls__quantity-group">
+		<Button
+			v-if="!isProductInCart"
+			@click="addToCart"
+			:data="'Add to cart'"
+			:aria-label="'Add to cart'"
+			class="card__button"
+		/>
+		<div class="cart-controls__quantity-group" v-if="isProductInCart">
 			<Button
 				@click="decrementQuantity"
 				:data="'-'"
@@ -16,6 +23,7 @@
 			/>
 		</div>
 		<Button
+			v-if="isProductInCart"
 			@click="removeFromCart"
 			:data="'Remove'"
 			:aria-label="'Remove from cart'"
@@ -26,11 +34,15 @@
 
 <script setup>
 import Button from '@/components/ui/Button.vue'
-import { computed } from 'vue'
+import { computed, defineProps } from 'vue'
 import { useStore } from '~/stores'
 
 const { productId } = defineProps(['productId'])
 const store = useStore()
+
+const isProductInCart = computed(() => {
+	return store.cart.some(cartProduct => cartProduct.id === productId)
+})
 
 const cartProductQuantity = computed(() => {
 	const cartProduct = store.cart.find(
@@ -38,6 +50,10 @@ const cartProductQuantity = computed(() => {
 	)
 	return cartProduct ? cartProduct.quantity : 0
 })
+
+const addToCart = () => {
+	store.addToCart(productId)
+}
 
 const removeFromCart = () => {
 	store.removeFromCart(productId)
@@ -54,30 +70,32 @@ const decrementQuantity = () => {
 
 <style scoped lang="scss">
 .cart-controls {
+	width: 100%;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	gap: 0.5rem;
-}
+	justify-content: space-between;
+	gap: 10px;
 
-.cart-controls__quantity-group {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-}
+	&__quantity-group {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
 
-.cart-controls__button {
-	&_remove-from-cart {
-		background-color: salmon;
-		width: 100px;
-	}
-	&_minus {
-		background-color: salmon;
-		width: 40px;
-	}
-	&_plus {
-		background-color: lightgreen;
-		width: 40px;
+	&__button {
+		&_remove-from-cart {
+			background-color: salmon;
+			width: 100px;
+		}
+		&_minus {
+			background-color: salmon;
+			width: 40px;
+		}
+		&_plus {
+			background-color: lightgreen;
+			width: 40px;
+		}
 	}
 }
 </style>

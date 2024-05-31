@@ -7,23 +7,28 @@
 - Pinia
 - Sass (BEM)
 
-### PAGES
+### PAGES & LAYOUTS
 
-- ✅Homepage
-- ✅About
-- ✅Marketplace
-  - ✅productID
-  - cart
-- ✅Custom 404
+- Landing (Advertisement) Layout
+  - Homepage
+  - About
+- Default Layout
+  - Marketplace
+    - ProductID
+    - Cart
+- Custom 404
 
 ### FEATURES
 
-- SEO optimization
-- Interactive cart popover
-- Payment Animation
-- ✅Customized 404
-- ✅Creatively animateg Logo
+- ⚒️SEO optimization
+- ⚒️Infinite scroll
+- ⚒️Cart products saving in localstorage
+- ✅Cart controls
+- ✅Payment Submitting
+- ✅Customized & animated 404
+- ✅Creatively animated Logo
 - ✅Creatively animated Loader
-- Infinite scroll
+- Interactive cart popover
 - Sort by categories
 - Search by title
+- Types

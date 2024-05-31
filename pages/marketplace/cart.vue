@@ -1,8 +1,10 @@
 <template>
-	<div class="cart container">
+	<div class="container page cart">
 		<h1 class="cart__title title">Your Cart</h1>
 		<div v-if="store.cart.length === 0" class="cart__empty">
-			<h2>There are no products in the cart yet :(</h2>
+			<h2 class="cart__empty-title">
+				There are no products in the cart yet :(
+			</h2>
 			<NuxtLink to="/marketplace" class="cart__empty-link">
 				<Button
 					data="Go to Marketplace"
@@ -20,15 +22,13 @@
 		</div>
 		<div v-if="store.cart.length > 0" class="cart__results">
 			<h2 class="cart__total">Total: {{ totalPrice }}$</h2>
-			<div class="cart__button-wrapper">
-				<Button
-					:disabled="paymentConfirmed"
-					data="Confirm payment"
-					ariaLabel="Confirm payment"
-					class="cart__button cart__button-payment"
-					@click="confirmPayment"
-				/>
-			</div>
+			<Button
+				:disabled="paymentConfirmed"
+				data="Confirm payment"
+				ariaLabel="Confirm payment"
+				class="cart__button cart__button-payment"
+				@click="confirmPayment"
+			/>
 		</div>
 		<div v-if="paymentConfirmed" class="cart__confirmation-message">
 			Payment Confirmed!
@@ -40,7 +40,7 @@
 import { computed, ref } from 'vue'
 import ProductCard from '~/components/marketplace/ProductCard.vue'
 import Button from '~/components/ui/Button.vue'
-import { useStore } from '~/stores/index'
+import { useStore } from '~/stores'
 
 const store = useStore()
 const paymentConfirmed = ref(false)
@@ -60,90 +60,41 @@ const confirmPayment = () => {
 
 <style lang="scss" scoped>
 .cart {
-	display: flex;
-	flex-direction: column;
-	gap: 32px;
-	min-height: 80vh;
-	padding: 16px;
-
-	&__title {
-		margin-top: 20px;
-	}
-
-	&__empty {
-		margin-top: 50px;
-		width: 100%;
+	&__empty,
+	&__results {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		text-align: center;
-
-		&-link {
-			margin-top: 20px;
-		}
-	}
-
-	&__button-wrapper {
-		position: relative;
-		width: 200px;
-		height: 40px;
-		display: flex;
-		align-items: center;
 		justify-content: center;
-	}
-
-	&__button {
+		align-items: center;
 		width: 100%;
 	}
 
 	&__list {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		gap: 16px;
 		justify-content: center;
-		width: 100%;
-
-		@media (min-width: 480px) {
-			flex-direction: row;
-			flex-wrap: wrap;
-			gap: 16px;
-		}
-	}
-
-	&__results {
-		display: flex;
-		flex-direction: column;
 		align-items: center;
-		width: 100%;
-
-		@media (min-width: 480px) {
-			flex-direction: row;
-			justify-content: center;
-			gap: 32px;
-			align-items: center;
-		}
 	}
 
-	&__total {
-		font-size: 24px;
-		font-weight: bold;
+	&__button {
+		width: 230px;
 	}
 
 	&__confirmation-message {
-		text-align: center;
-		font-size: 24px;
 		color: green;
+		font-size: 20px;
 		font-weight: bold;
-		animation: fadeIn 1s ease-in-out;
-		margin-top: 16px;
+		text-align: center;
 	}
+}
 
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
+@media (min-width: 480px) {
+	.cart {
+		&__list {
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-items: unset;
 		}
 	}
 }

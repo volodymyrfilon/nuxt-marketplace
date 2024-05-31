@@ -18,6 +18,9 @@ export const useStore = defineStore('store', {
 				)
 				.toFixed(2)
 		},
+		getProductById: state => (productId: number) => {
+			return state.products.find(product => product.id === productId)
+		},
 	},
 	actions: {
 		async fetchProducts() {
@@ -33,12 +36,17 @@ export const useStore = defineStore('store', {
 				console.error('Failed to fetch products:', error)
 			}
 		},
-		addToCart(product: Product) {
-			const cartProduct = this.cart.find(item => item.id === product.id)
+		addToCart(productId: number) {
+			const cartProduct = this.cart.find(item => item.id === productId)
 			if (cartProduct) {
 				cartProduct.quantity++
 			} else {
-				this.cart.push({ ...product, quantity: 1 })
+				const product = this.getProductById(productId)
+				if (product) {
+					this.cart.push({ ...product, quantity: 1 })
+				} else {
+					console.error('Product not found!')
+				}
 			}
 		},
 		removeFromCart(productId: number) {

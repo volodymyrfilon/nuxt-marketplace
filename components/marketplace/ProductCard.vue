@@ -1,44 +1,27 @@
 <template>
 	<div class="card">
-		<img :src="product.image" alt="Product thumb" class="card__thumb" />
+		<img class="card__thumb" :src="product.image" alt="Product thumb" />
 		<NuxtLink
+			class="card__title"
 			@click="setSelectedProductId"
 			:to="`/marketplace/${product.id}`"
-			class="card__title"
 		>
 			{{ product.title }}
 		</NuxtLink>
 		<div class="card__price">${{ product.price }}</div>
-		<Button
-			v-if="!isProductInCart"
-			@click="addToCart"
-			:data="'Add to cart'"
-			:aria-label="'Add to cart'"
-			class="card__button card__button_add-to-cart"
-		/>
-		<CartControls v-else :productId="product.id" />
+		<CartControls class="card__controls" :productId="product.id" />
 	</div>
 </template>
 
 <script setup>
-import CartControls from '@/components/marketplace/CartControls.vue'
-import Button from '@/components/ui/Button.vue'
-import { computed } from 'vue'
 import { useStore } from '~/stores'
+import CartControls from './CardControls.vue'
 
 const { product } = defineProps(['product'])
 const store = useStore()
 
-const isProductInCart = computed(() => {
-	return store.cart.some(cartProduct => cartProduct.id === product.id)
-})
-
 const setSelectedProductId = () => {
 	store.selectedProduct = product
-}
-
-const addToCart = () => {
-	store.addToCart(product)
 }
 </script>
 
@@ -49,7 +32,6 @@ const addToCart = () => {
 	padding: 12px 16px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	transition: all 0.3s ease;
-
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -81,34 +63,9 @@ const addToCart = () => {
 		}
 	}
 
-	&__button-group {
+	&__button,
+	&__controls {
 		margin-top: auto;
-		display: flex;
-		justify-content: space-between;
-	}
-
-	&__button-quantity-group {
-		display: flex;
-		align-items: center;
-		gap: 16px;
-	}
-
-	&__button {
-		&_add-to-cart {
-			margin-top: auto;
-		}
-		&_remove-from-cart {
-			background-color: salmon;
-			width: 90px;
-		}
-		&_minus {
-			background-color: salmon;
-			width: 40px;
-		}
-		&_plus {
-			background-color: lightgreen;
-			width: 40px;
-		}
 	}
 }
 

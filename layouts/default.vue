@@ -5,7 +5,7 @@
 		<slot />
 	</main>
 
-	<Footer />
+	<Footer class="footer-default" />
 </template>
 
 <script setup>
@@ -20,12 +20,11 @@ const navigationData = [
 		label: 'Cart',
 		isDisabled: false,
 	},
-	{
-		link: '/marketplace/support',
-		label: 'Support',
-		isDisabled: true,
-	},
 ]
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.footer-default {
+	margin-top: 20px;
+}
+</style>

@@ -8,12 +8,11 @@
 			src="https://ufo-engineering.com/img/ufo.svg"
 			alt="Homepage image"
 		/>
-
 		<NuxtLink class="homepage__link" to="/marketplace">
 			<Button
-				data="Get started"
-				ariaLabel="Go to markerplace"
 				class="homepage__button"
+				data="Get started"
+				ariaLabel="Go to marketplace"
 			/>
 		</NuxtLink>
 		<p class="homepage__subtitle">
@@ -53,9 +52,7 @@ definePageMeta({
 	gap: 40px;
 
 	&__title {
-		width: 90%;
 		margin: 0 auto;
-		text-align: center;
 	}
 	&__img {
 		width: 100%;
@@ -65,59 +62,38 @@ definePageMeta({
 	&__subtitle {
 		width: 90%;
 		text-align: center;
-		font-size: 16px;
+		font-size: clamp(18px, calc(2vw + 10px), 24px);
 		font-family: 'Open Sans', sans-serif;
 		margin: 0 auto;
+		margin-bottom: 40px;
 	}
 	&__link {
 		position: relative;
-		width: 180px;
+		display: flex;
+		justify-content: center;
 		left: 50%;
 		transform: translateX(-50%);
+		width: 200px;
 	}
 	&__button {
-		background-color: #3b9de8 !important;
 		color: white;
+		background-color: #3b9de8;
 		text-transform: uppercase;
 		font-weight: 600;
 	}
-
-	@media (min-width: 480px) {
-		&__subtitle {
-			font-size: 18px;
-		}
-		&__link-item {
-			font-size: 18px;
-		}
-	}
 	@media (min-width: 768px) {
-		&__title {
-			width: 85%;
-		}
 		&__subtitle {
-			font-size: 20px;
 			width: 70%;
-		}
-		&__link-item {
-			font-size: 20px;
 		}
 	}
 	@media (min-width: 1024px) {
-		&__title {
-			width: 75%;
-		}
 		&__subtitle {
 			width: 60%;
-			font-size: 22px;
 		}
 	}
 	@media (min-width: 1440px) {
-		&__title {
-			width: 70%;
-		}
 		&__subtitle {
 			width: 50%;
-			font-size: 24px;
 		}
 	}
 }

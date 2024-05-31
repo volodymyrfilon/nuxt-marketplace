@@ -86,6 +86,10 @@ definePageMeta({
 	gap: 10px 0;
 	font-family: 'Open Sans', sans-serif;
 
+	&__title {
+		text-align: center;
+	}
+
 	&__section-title {
 		font-family: 'Montserrat', sans-serif;
 		font-size: 20px;
