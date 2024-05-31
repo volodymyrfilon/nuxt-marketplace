@@ -1,22 +1,26 @@
 <template>
 	<div class="container marketplace">
 		<h1 class="marketplace__title title">Marketplace</h1>
-		<ProductList :products="products" />
+		<Loader v-if="products.length === 0" class="product-list__loader" />
+		<ProductList v-else :products="products" />
 	</div>
 </template>
 
 <script setup>
 import ProductList from '@/components/marketplace/ProductList.vue'
-import { computed, onMounted } from 'vue'
-import { useStore } from '~/store'
+import { useStore } from '~/stores'
 
 const store = useStore()
+let products = []
 
-onMounted(() => {
-	store.fetchProducts()
+const loadProducts = async () => {
+	await store.fetchProducts()
+	return (products = store.products)
+}
+
+onMounted(async () => {
+	await loadProducts()
 })
-
-const products = computed(() => store.products)
 </script>
 
 <style lang="scss" scoped>

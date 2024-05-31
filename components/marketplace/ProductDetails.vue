@@ -17,29 +17,7 @@
 						:aria-label="'Add to cart'"
 						class="card__button card__button_add-to-cart"
 					/>
-					<div v-else class="card__button-group">
-						<div class="card__button-quantity-group">
-							<Button
-								@click="decrementQuantity"
-								:data="'-'"
-								:aria-label="'Decrease quantity'"
-								class="card__button card__button_minus"
-							/>
-							{{ cartProductQuantity }}
-							<Button
-								@click="incrementQuantity"
-								:data="'+'"
-								:aria-label="'Increase quantity'"
-								class="card__button card__button_plus"
-							/>
-						</div>
-						<Button
-							@click="removeFromCart"
-							:data="'Remove'"
-							:aria-label="'Remove from cart'"
-							class="card__button card__button_remove-from-cart"
-						/>
-					</div>
+					<CartControls v-else :productId="product.id" />
 				</div>
 			</div>
 		</div>
@@ -47,9 +25,10 @@
 </template>
 
 <script setup>
+import CartControls from '@/components/marketplace/CartControls.vue'
 import Button from '@/components/ui/Button.vue'
 import { computed } from 'vue'
-import { useStore } from '~/store'
+import { useStore } from '~/stores'
 
 const { product } = defineProps(['product'])
 const store = useStore()
@@ -58,27 +37,8 @@ const isProductInCart = computed(() => {
 	return store.cart.some(cartProduct => cartProduct.id === product.id)
 })
 
-const cartProductQuantity = computed(() => {
-	const cartProduct = store.cart.find(
-		cartProduct => cartProduct.id === product.id
-	)
-	return cartProduct ? cartProduct.quantity : 0
-})
-
 const addToCart = () => {
 	store.addToCart(product)
-}
-
-const removeFromCart = () => {
-	store.removeFromCart(product.id)
-}
-
-const incrementQuantity = () => {
-	store.incrementProductQuantity(product.id)
-}
-
-const decrementQuantity = () => {
-	store.decrementProductQuantity(product.id)
 }
 </script>
 
@@ -133,37 +93,6 @@ const decrementQuantity = () => {
 		align-items: center;
 		justify-content: center;
 		margin-top: 1rem;
-	}
-
-	&__button-group {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	&__button-quantity-group {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	&__button {
-		&_add-to-cart {
-			margin-top: 1rem;
-		}
-		&_remove-from-cart {
-			background-color: salmon;
-			width: 100px;
-		}
-		&_minus {
-			background-color: salmon;
-			width: 40px;
-		}
-		&_plus {
-			background-color: lightgreen;
-			width: 40px;
-		}
 	}
 
 	@media (min-width: 768px) {

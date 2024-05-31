@@ -62,4 +62,11 @@ export const useStore = defineStore('store', {
 			this.cart = []
 		},
 	},
+	persist: {
+		paths: ['cart'],
+	},
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useStore, import.meta.hot))
+}

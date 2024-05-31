@@ -40,7 +40,7 @@
 import { computed, ref } from 'vue'
 import ProductCard from '~/components/marketplace/ProductCard.vue'
 import Button from '~/components/ui/Button.vue'
-import { useStore } from '~/store'
+import { useStore } from '~/stores/index'
 
 const store = useStore()
 const paymentConfirmed = ref(false)
