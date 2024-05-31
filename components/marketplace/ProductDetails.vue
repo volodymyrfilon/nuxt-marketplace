@@ -9,15 +9,77 @@
 				<p class="card__price">Price - ${{ product.price }}</p>
 				<h3 class="card__description-title">Product description:</h3>
 				<p class="card__description">{{ product.description }}</p>
+				<div class="card__button-wrapper">
+					<Button
+						v-if="!isProductInCart"
+						@click="addToCart"
+						:data="'Add to cart'"
+						:aria-label="'Add to cart'"
+						class="card__button card__button_add-to-cart"
+					/>
+					<div v-else class="card__button-group">
+						<div class="card__button-quantity-group">
+							<Button
+								@click="decrementQuantity"
+								:data="'-'"
+								:aria-label="'Decrease quantity'"
+								class="card__button card__button_minus"
+							/>
+							{{ cartProductQuantity }}
+							<Button
+								@click="incrementQuantity"
+								:data="'+'"
+								:aria-label="'Increase quantity'"
+								class="card__button card__button_plus"
+							/>
+						</div>
+						<Button
+							@click="removeFromCart"
+							:data="'Remove'"
+							:aria-label="'Remove from cart'"
+							class="card__button card__button_remove-from-cart"
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import Button from '@/components/ui/Button.vue'
+import { computed } from 'vue'
+import { useStore } from '~/store'
 
 const { product } = defineProps(['product'])
+const store = useStore()
+
+const isProductInCart = computed(() => {
+	return store.cart.some(cartProduct => cartProduct.id === product.id)
+})
+
+const cartProductQuantity = computed(() => {
+	const cartProduct = store.cart.find(
+		cartProduct => cartProduct.id === product.id
+	)
+	return cartProduct ? cartProduct.quantity : 0
+})
+
+const addToCart = () => {
+	store.addToCart(product)
+}
+
+const removeFromCart = () => {
+	store.removeFromCart(product.id)
+}
+
+const incrementQuantity = () => {
+	store.incrementProductQuantity(product.id)
+}
+
+const decrementQuantity = () => {
+	store.decrementProductQuantity(product.id)
+}
 </script>
 
 <style scoped lang="scss">
@@ -63,6 +125,45 @@ const { product } = defineProps(['product'])
 
 	&__description {
 		margin-bottom: 1.75rem;
+	}
+
+	&__button-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1rem;
+	}
+
+	&__button-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	&__button-quantity-group {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	&__button {
+		&_add-to-cart {
+			margin-top: 1rem;
+		}
+		&_remove-from-cart {
+			background-color: salmon;
+			width: 100px;
+		}
+		&_minus {
+			background-color: salmon;
+			width: 40px;
+		}
+		&_plus {
+			background-color: lightgreen;
+			width: 40px;
+		}
 	}
 
 	@media (min-width: 768px) {

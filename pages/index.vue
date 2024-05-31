@@ -8,11 +8,14 @@
 			src="https://ufo-engineering.com/img/ufo.svg"
 			alt="Homepage image"
 		/>
-		<div class="homepage__link">
-			<NuxtLink class="homepage__link-item" to="/marketplace">
-				Get started
-			</NuxtLink>
-		</div>
+
+		<NuxtLink class="homepage__link" to="/marketplace">
+			<Button
+				data="Get started"
+				ariaLabel="Go to markerplace"
+				class="homepage__button"
+			/>
+		</NuxtLink>
 		<p class="homepage__subtitle">
 			Welcome to Nuxt Marketplace, where you can discover a wide range of
 			products from top brands and local sellers. Our user-friendly platform
@@ -25,6 +28,8 @@
 </template>
 
 <script setup>
+import Button from '~/components/ui/Button.vue'
+
 definePageMeta({
 	layout: 'landing',
 })
@@ -63,21 +68,18 @@ definePageMeta({
 		font-size: 16px;
 		font-family: 'Open Sans', sans-serif;
 		margin: 0 auto;
-		margin-bottom: 40px;
 	}
 	&__link {
-		display: flex;
-		justify-content: center;
-		&-item {
-			padding: 12px 18px;
-			color: white;
-			font-size: 16px;
-			border-radius: 10px;
-			background-color: #3b9de8;
-			text-transform: uppercase;
-			font-weight: 600;
-			text-align: center;
-		}
+		position: relative;
+		width: 180px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	&__button {
+		background-color: #3b9de8 !important;
+		color: white;
+		text-transform: uppercase;
+		font-weight: 600;
 	}
 
 	@media (min-width: 480px) {

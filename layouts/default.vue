@@ -5,7 +5,7 @@
 		<slot />
 	</main>
 
-	<Footer class="footer-default" />
+	<Footer />
 </template>
 
 <script setup>
@@ -28,8 +28,4 @@ const navigationData = [
 ]
 </script>
 
-<style scoped lang="scss">
-.footer-default {
-	margin-top: 20px;
-}
-</style>
+<style scoped lang="scss"></style>

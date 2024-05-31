@@ -10,11 +10,13 @@ export const useStore = defineStore('store', {
 	}),
 	getters: {
 		totalPrice(state) {
-			return state.cart.reduce(
-				(total, product) =>
-					total + parseFloat(product.price) * product.quantity,
-				0
-			)
+			return state.cart
+				.reduce(
+					(total, product) =>
+						total + parseFloat(product.price) * product.quantity,
+					0
+				)
+				.toFixed(2)
 		},
 	},
 	actions: {
@@ -55,6 +57,9 @@ export const useStore = defineStore('store', {
 			} else if (cartProduct && cartProduct.quantity === 1) {
 				this.removeFromCart(productId)
 			}
+		},
+		clearCart() {
+			this.cart = []
 		},
 	},
 })

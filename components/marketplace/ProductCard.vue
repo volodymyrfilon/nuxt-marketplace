@@ -34,7 +34,7 @@
 			</div>
 			<Button
 				@click="removeFromCart"
-				:data="'X'"
+				:data="'Remove'"
 				:aria-label="'Remove from cart'"
 				class="card__button card__button_remove-from-cart"
 			/>
@@ -44,8 +44,8 @@
 
 <script setup>
 import Button from '@/components/ui/Button.vue'
-import { useStore } from '~/store'
 import { computed } from 'vue'
+import { useStore } from '~/store'
 
 const { product } = defineProps(['product'])
 const store = useStore()
