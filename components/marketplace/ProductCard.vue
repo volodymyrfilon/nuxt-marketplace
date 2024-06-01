@@ -1,28 +1,20 @@
 <template>
 	<div class="card">
-		<img class="card__thumb" :src="product.image" alt="Product thumb" />
-		<NuxtLink
-			class="card__title"
-			@click="setSelectedProductId"
-			:to="`/marketplace/${product.id}`"
-		>
+		<img class="card__thumb" :src="product.images[0]" alt="Product thumb" />
+		<NuxtLink class="card__title" :to="`/marketplace/${product.id}`">
 			{{ product.title }}
 		</NuxtLink>
-		<div class="card__price">${{ product.price }}</div>
+		<div class="card__badge card__badge--price">${{ product.price }}</div>
+		<div class="card__badge card__badge--rating">
+			&#9733;&nbsp;{{ product.rating }}
+		</div>
 		<CartControls class="card__controls" :productId="product.id" />
 	</div>
 </template>
 
 <script setup>
-import { useStore } from '~/stores'
 import CartControls from './CardControls.vue'
-
 const { product } = defineProps(['product'])
-const store = useStore()
-
-const setSelectedProductId = () => {
-	store.selectedProduct = product
-}
 </script>
 
 <style lang="scss" scoped>
@@ -48,14 +40,23 @@ const setSelectedProductId = () => {
 		object-fit: contain;
 	}
 
-	&__price {
+	&__badge {
 		position: absolute;
-		top: 12px;
-		right: 20px;
 		padding: 8px 12px;
 		background-color: #ddefff;
 		border-radius: 12px;
 		font-weight: 600;
+
+		&--price {
+			top: 12px;
+			right: 20px;
+		}
+
+		&--rating {
+			top: 12px;
+			left: 20px;
+			background-color: lightgoldenrodyellow;
+		}
 	}
 
 	&__title {

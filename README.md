@@ -21,7 +21,7 @@
 ### FEATURES
 
 - ✅SEO
-- ⚒️Infinite scroll
+- ✅Infinite scroll
 - ⚒️Cart products saving in localstorage
 - ✅Interactive cart dialog
 - ✅Cart controls

@@ -1,23 +1,48 @@
 <template>
 	<Head>
-		<Title>Nuxt Markeplace | {{ product.title }}</Title>
-		<Meta name="description" :content="product.description" />
+		<Title>Nuxt Marketplace | {{ selectedProduct.title }}</Title>
+		<Meta name="description" :content="selectedProduct.description" />
 	</Head>
-	<ProductDetails :product="product" />
-	>
+	<div class="container page product">
+		<Loader v-if="loading" class="product__loader" />
+		<ProductDetails v-else :product="selectedProduct" />
+	</div>
 </template>
 
 <script setup>
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import Loader from '~/components/Loader.vue'
 import ProductDetails from '~/components/marketplace/ProductDetails.vue'
+import { useStore } from '~/stores/'
 
-const { id } = useRoute().params
-const uri = 'https://fakestoreapi.com/products/' + id
+const route = useRoute()
+const store = useStore()
+const selectedProduct = computed(() => store.selectedProduct || {})
+const loading = ref(true)
 
-const { data: product } = await useFetch(uri, { key: id })
-
-if (!product.value) {
-	throw createError({ status: 404, statusMessage: 'Product not found' })
+const loadProductById = async id => {
+	loading.value = true
+	await store.fetchProductById(id)
+	loading.value = false
 }
+
+onMounted(() => {
+	loadProductById(route.params.id)
+})
+
+watch(
+	() => route.params.id,
+	newId => {
+		loadProductById(newId)
+	}
+)
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.product {
+	&__loader {
+		height: 50vh;
+	}
+}
+</style>

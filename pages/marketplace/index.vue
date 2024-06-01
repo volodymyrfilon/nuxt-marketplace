@@ -1,5 +1,5 @@
 <template>
-	<div class="container page marketplace">
+	<div class="container page marketplace" @scroll="handleScroll">
 		<h1 class="marketplace__title title">Marketplace</h1>
 		<Loader v-if="products.length === 0" class="marketplace__loader" />
 		<ProductList
@@ -9,20 +9,41 @@
 		/>
 	</div>
 </template>
+
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref, onBeforeUnmount } from 'vue'
 import ProductList from '~/components/marketplace/ProductList.vue'
-import { useStore } from '~/stores'
+import Loader from '~/components/Loader.vue'
+import { useStore } from '~/stores/'
 
 const store = useStore()
 const products = computed(() => store.products || [])
+const loading = ref(store.loading)
 
 const loadProducts = async () => {
 	await store.fetchProducts()
 }
 
+const loadMoreProducts = async () => {
+	await store.fetchProducts()
+}
+
+const handleScroll = () => {
+	const bottomOfWindow =
+		window.innerHeight + window.scrollY >=
+		document.documentElement.offsetHeight - 2
+	if (bottomOfWindow && !loading.value) {
+		loadMoreProducts()
+	}
+}
+
 onMounted(async () => {
 	await loadProducts()
+	window.addEventListener('scroll', handleScroll)
+})
+
+onBeforeUnmount(() => {
+	window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -30,6 +51,9 @@ onMounted(async () => {
 .marketplace {
 	&__loader {
 		height: 50vh;
+	}
+	&__bottom-loader {
+		margin-top: 20px;
 	}
 }
 </style>

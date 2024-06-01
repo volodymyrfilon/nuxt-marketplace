@@ -1,7 +1,11 @@
 <template>
 	<div class="container page details">
 		<div class="details__image-container">
-			<img :src="product.image" alt="Product image" class="details__image" />
+			<img
+				:src="product.images[0]"
+				alt="Product image"
+				class="details__image"
+			/>
 		</div>
 		<div class="details__details">
 			<h2 class="details__title">
@@ -9,6 +13,8 @@
 			</h2>
 			<p class="details__price">
 				Price - ${{ product.price }}
+				<br />
+				Rating - {{ product.rating }}&nbsp;&#9733;
 				<CardControls :productId="product.id" class="details__controls" />
 			</p>
 			<h3 class="details__description-title">Product description:</h3>

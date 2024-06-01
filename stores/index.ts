@@ -7,6 +7,10 @@ export const useStore = defineStore('store', {
 		products: [] as Product[],
 		selectedProduct: {} as Product,
 		cart: [] as CartProduct[],
+		limit: 8,
+		skip: 0,
+		loading: false,
+		initialLoad: true,
 	}),
 	getters: {
 		totalPrice(state) {
@@ -24,16 +28,48 @@ export const useStore = defineStore('store', {
 	},
 	actions: {
 		async fetchProducts() {
+			if (this.loading) return
+			this.loading = true
 			try {
-				const response = await fetch('https://fakestoreapi.com/products')
-				const data = await response.json()
-				if (data) {
-					this.products = data
+				const limit = this.initialLoad ? 20 : this.limit
+				const response = await fetch(
+					`https://dummyjson.com/products?limit=${limit}&skip=${this.skip}&select=title,price,images,rating`
+				)
+				if (!response.ok) throw new Error('Network response was not ok')
+				const { products } = await response.json()
+				if (products) {
+					this.products = this.initialLoad
+						? products
+						: [...this.products, ...products]
+					this.skip += limit
+					this.initialLoad = false
 				} else {
-					console.error('Failed to fetch products: data is undefined')
+					console.error('Failed to fetch products: products data is undefined')
 				}
 			} catch (error) {
 				console.error('Failed to fetch products:', error)
+			} finally {
+				this.loading = false
+			}
+		},
+		async fetchProductById(id: number) {
+			if (this.loading) return
+			this.loading = true
+			try {
+				const response = await fetch(
+					`https://dummyjson.com/products/${id}?select=title,price,images,rating,description`
+				)
+				if (!response.ok) throw new Error('Network response was not ok')
+				const data = await response.json()
+				if (data) {
+					this.selectedProduct = { ...data }
+				} else {
+					console.error('Failed to fetch product: data is undefined')
+				}
+			} catch (error) {
+				console.error(`Failed to fetch product with id ${id}:`, error)
+			} finally {
+				this.loading = false
 			}
 		},
 		addToCart(productId: number) {
