@@ -14,16 +14,19 @@ const navigationData = [
 		link: '/',
 		label: 'Home',
 		isDisabled: false,
+		isCart: false,
 	},
 	{
 		link: '/about',
 		label: 'About',
 		isDisabled: false,
+		isCart: false,
 	},
 	{
 		link: '/marketplace',
 		label: 'Marketplace',
 		isDisabled: false,
+		isCart: false,
 	},
 ]
 </script>

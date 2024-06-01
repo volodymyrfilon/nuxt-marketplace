@@ -7,6 +7,11 @@
 </template>
 
 <script setup>
+import Logo from '~/components/Logo.vue'
+import Navigation from '~/components/Navigation.vue'
+import MobileNavigation from '~/components/MobileNavigation.vue'
+import CartDialog from '~/components/marketplace/CartDialog.vue'
+
 const { data } = defineProps(['data'])
 </script>
 

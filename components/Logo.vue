@@ -42,7 +42,7 @@
 
 	@keyframes fly-ufo-blue {
 		0% {
-			transform: translate(-100%, -50%) translateX(0);
+			transform: translate(-100%, -50%) translateX(0) scale(125%);
 			z-index: 1;
 		}
 		25% {
@@ -52,7 +52,7 @@
 			z-index: -1;
 		}
 		50% {
-			transform: translate(-100%, -50%) translateX(570%);
+			transform: translate(-100%, -50%) translateX(570%) scale(75%);
 		}
 		75% {
 			transform: translate(-100%, -110%) translateX(400%);
@@ -61,7 +61,7 @@
 			z-index: 0;
 		}
 		100% {
-			transform: translate(-100%, -50%) translateX(0);
+			transform: translate(-100%, -50%) translateX(0) scale(125%);
 			z-index: 1;
 		}
 	}

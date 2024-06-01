@@ -16,16 +16,18 @@
 			/>
 		</NuxtLink>
 		<p class="homepage__subtitle">
-			{{ data.landingPageDescription }}
+			Welcome to Nuxt Marketplace, where you can discover a wide range of
+			products from top brands and local sellers. Our user-friendly platform
+			ensures a seamless shopping experience, whether you're looking for the
+			latest electronics, trendy fashion, home essentials, or unique handmade
+			items. Start exploring today and enjoy secure payments, fast shipping, and
+			exceptional customer service!
 		</p>
 	</div>
 </template>
 
 <script setup>
 import Button from '~/components/ui/Button.vue'
-
-const { data } = await useFetch('/api/data/')
-// const { data } = await useFetch('/api/fakeApi/1')
 
 definePageMeta({
 	layout: 'landing',

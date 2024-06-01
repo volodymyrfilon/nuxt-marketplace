@@ -34,6 +34,8 @@ const setSelectedProductId = () => {
 	transition: all 0.3s ease;
 	display: flex;
 	flex-direction: column;
+	border-radius: 16px;
+	background-color: white;
 	gap: 20px;
 	&:hover {
 		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);

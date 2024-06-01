@@ -21,15 +21,14 @@
 ### FEATURES
 
 - ✅SEO
-- ✅Server side api requests
 - ⚒️Infinite scroll
 - ⚒️Cart products saving in localstorage
+- ✅Interactive cart dialog
 - ✅Cart controls
 - ✅Payment Submitting
 - ✅Customized & animated 404
 - ✅Creatively animated Logo
 - ✅Creatively animated Loader
-- Interactive cart dialog
 - Sort by categories
 - Search by title
 - Types
